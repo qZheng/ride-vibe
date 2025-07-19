@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { videoApi } from './api';
+import { videoApi } from '../api';
 
 const UploadPanel = () => {
   const [isUploading, setIsUploading] = useState(false);
