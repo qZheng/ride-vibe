@@ -2,7 +2,15 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
-from config import client, INDEX_ID, META_PATH
+from .config import client, INDEX_ID, META_PATH
+try:
+    from .gemini_analysis import analyze_video
+except ImportError:
+    # Fallback for when running as script
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from scripts.gemini_analysis import analyze_video
 
 
 def _meta() -> dict[str, dict]:
@@ -23,9 +31,9 @@ def search_best(
     options: tuple[str, ...] = ("visual", "audio"),
 ) -> dict[str, Any] | None:
     if not INDEX_ID:
-        raise RuntimeError("TL_INDEX_ID missin")
+        raise RuntimeError("TL_INDEX_ID missing")
 
-    resp = client.search.query(INDEX_ID, options=list(options), query_text=query)
+    resp = client.search.query(INDEX_ID, options=list(options), query_text=query)  # type: ignore
     results = getattr(resp, "results", None) or getattr(resp, "data", [])
     if not results:
         return None
@@ -36,8 +44,17 @@ def search_best(
     start, end = _times(d)
     meta = _meta().get(d["video_id"], {})
 
+    # Get Gemini analysis for the video
+    gemini_result = None
+    try:
+        gemini_result = analyze_video(d["video_id"], query)
+        if gemini_result and "error" not in gemini_result:
+            meta.update(gemini_result)
+    except Exception as e:
+        print(f"Warning: Failed to get Gemini analysis: {e}")
+
     return {**d, "start_sec": start, "end_sec": end, **meta}
 
 
 if __name__ == "__main__":
-    print(search_best("foggy forest descent with roots"))
+    print(search_best("big jump on mountain bike"))

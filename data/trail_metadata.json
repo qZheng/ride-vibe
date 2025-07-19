@@ -1,9 +1,28 @@
 [
   {
-    "filename": "video.mp4",
-    "video_id": "687b133a2b144dc12e02fcf9",
-    "trail_name": "Video",
+    "filename": "Riding The Biggest Jumps At Bike Park Vanta Full Run.mp4",
+    "video_id": "687be1562b144dc12e03164b",
+    "trail_name": "Riding The Biggest Jumps At Bike Park Vanta Full Run",
     "duration": null,
-    "indexed_at": "2025-07-19T03:40:26Z"
+    "indexed_at": "2025-07-19T18:19:24Z",
+    "location": {
+      "latitude": null,
+      "longitude": null,
+      "name": null
+    },
+    "difficulty_rating": null
+  },
+  {
+    "filename": "Trails at Whistler Compilation.mp4",
+    "video_id": "687be1fb2b144dc12e03165f",
+    "trail_name": "Trails At Whistler Compilation",
+    "duration": null,
+    "indexed_at": "2025-07-19T18:22:52Z",
+    "location": {
+      "latitude": null,
+      "longitude": null,
+      "name": null
+    },
+    "difficulty_rating": null
   }
 ]

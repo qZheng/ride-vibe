@@ -12,7 +12,6 @@ MODEL    = os.getenv("TL_MODEL", "marengo2.7")  # default: latest multimodal
 if not API_KEY:
     raise RuntimeError("Set twelve api key")
 
-# singleton client used by all modules
 client: TwelveLabs = TwelveLabs(api_key=API_KEY)
 
 BASE_DIR      = Path(__file__).resolve().parent.parent
