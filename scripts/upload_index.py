@@ -1,4 +1,3 @@
-# scripts/upload_index.py
 from __future__ import annotations
 import json, logging, time
 from pathlib import Path
@@ -37,8 +36,6 @@ def main():
         task = upload_one(video)
 
         if task.status == "ready":
-            # if your SDK lacks client.video.retrieve(), skip duration or
-            # replace with a constant / another call
             meta.append({
                 "filename":   video.name,
                 "video_id":   task.video_id,
@@ -48,7 +45,7 @@ def main():
             })
             save_meta(meta)
         else:
-            logging.warning(f"❌ Task failed: {task.error}")
+            logging.warning(f"failed: {task.error}")
 
 if __name__ == "__main__":
     main()

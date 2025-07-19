@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.env/
+.Python
+.vscode/
+data/videos/*.mp4
+data/thumbnails/
+.env
