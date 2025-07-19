@@ -6,7 +6,7 @@ Analyze video summaries using Gemini AI
 import json
 import os
 import google.generativeai as genai
-from .get_play_by_play import get_metadata_text
+from .for_gemini import get_metadata_text
 
 # Configure Gemini
 genai.configure(api_key=os.getenv('GEMINI_API_KEY')) # type: ignore

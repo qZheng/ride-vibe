@@ -1,8 +1,3 @@
-"""
-Video Server for Ride Vibe
-Lightweight video hosting service for streaming videos to React frontend
-"""
-
 from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
 import json
@@ -29,7 +24,7 @@ def get_video_meta(video_id):
 
 @app.route("/")
 def health():
-    return jsonify({"message": "Ride Vibe Video Server (Flask)", "status": "healthy"})
+    return jsonify({"message": "TrailSense Video Server (Flask)", "status": "healthy"})
 
 @app.route("/videos")
 def list_videos():
@@ -66,22 +61,6 @@ def search():
         return jsonify(result)
     except Exception as e:
         error_message = str(e)
-        
-        # Check if it's a rate limit error
-        if "429" in error_message or "too_many_requests" in error_message.lower():
-            return jsonify({
-                "error": "Rate limit exceeded",
-                "message": "We've hit our daily search limit. Please try again tomorrow or contact support for more searches.",
-                "rate_limited": True
-            }), 429
-        elif "rate limit" in error_message.lower():
-            return jsonify({
-                "error": "Rate limit exceeded",
-                "message": "We've hit our daily search limit. Please try again tomorrow or contact support for more searches.",
-                "rate_limited": True
-            }), 429
-        else:
-            return jsonify({"error": str(e)}), 500
 
 @app.route("/gemini/chat", methods=["POST"])
 def gemini_chat():
