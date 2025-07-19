@@ -52,7 +52,7 @@ function App() {
     <div className="dashboard-root">
       <div className="dashboard-left">
         <div className="title-bubble">
-          <h1>TrailSense v0.1</h1>
+          <h1>TrailSense<small><small><small> v0.1</small></small></small></h1>
         </div>
         <ChatPanel 
           onSearch={handleSearch}
