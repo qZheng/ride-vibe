@@ -95,7 +95,6 @@ export default function ChatPanel({ onSearch, isConnected }) {
         {isLoading && (
           <div className="loading-bubble">
             <div className="loading-bubble-content">
-              <span>Searching for videos...</span>
               <div className="loading-dots">
                 <div className="loading-dot"></div>
                 <div className="loading-dot"></div>
