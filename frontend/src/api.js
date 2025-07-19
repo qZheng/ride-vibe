@@ -59,6 +59,25 @@ export const videoApi = {
 
   getVideoUrl(videoId) {
     return `${API_BASE_URL}/videos/${videoId}/file`;
+  },
+
+  async uploadVideo(formData) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/upload`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Upload failed: ${response.status} ${errorText}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Upload error:', error);
+      throw error;
+    }
   }
 };
 

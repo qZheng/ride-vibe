@@ -6,9 +6,9 @@
     "duration": null,
     "indexed_at": "2025-07-19T18:19:24Z",
     "location": {
-      "latitude": null,
-      "longitude": null,
-      "name": null
+      "latitude": 50.116249826463914,
+      "longitude": -122.94384382514167,
+      "name": "Whistler Bike Park"
     },
     "difficulty_rating": null
   },
@@ -19,10 +19,38 @@
     "duration": null,
     "indexed_at": "2025-07-19T18:22:52Z",
     "location": {
+      "latitude": 50.116249826463914,
+      "longitude": -122.94384382514167,
+      "name": "Whistler Bike Park"
+    },
+    "difficulty_rating": "9/10"
+  },
+  {
+    "filename": "20250719_184314_Santa Barbara GoPro Gravel Bike Descent POV.mp4",
+    "video_id": "upload_20250719_184314",
+    "trail_name": "Santa Barbara GoPro Gravel Bike Descent POV",
+    "duration": null,
+    "indexed_at": "2025-07-19T22:43:14Z",
+    "location": {
       "latitude": null,
       "longitude": null,
-      "name": null
+      "name": ""
     },
-    "difficulty_rating": null
+    "difficulty_rating": null,
+    "description": ""
+  },
+  {
+    "filename": "20250719_184334_Santa Barbara GoPro Gravel Bike Descent POV.mp4",
+    "video_id": "upload_20250719_184334",
+    "trail_name": "Santa Barbara GoPro Gravel Bike Descent POV",
+    "duration": null,
+    "indexed_at": "2025-07-19T22:43:34Z",
+    "location": {
+      "latitude": null,
+      "longitude": null,
+      "name": ""
+    },
+    "difficulty_rating": null,
+    "description": ""
   }
 ]

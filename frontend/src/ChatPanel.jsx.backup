@@ -4,14 +4,14 @@ export default function ChatPanel({ onSearch, isConnected }) {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
-  const phrases = [
-    "steep switchbacks carved into a canyon wall at high noon",
-    "steep downhill with sketchy rock gardens",
-    "chill ride through thick foggy forest",
-    "flowy singletrack with golden hour light"
+  const examples = [
+    "Flowy singletrack with golden hour light",
+    "Steep downhill with sketchy rock gardens", 
+    "Chill ride through thick foggy forest"
   ];
 
   const scrollToBottom = () => {
@@ -22,28 +22,26 @@ export default function ChatPanel({ onSearch, isConnected }) {
     scrollToBottom();
   }, [messages]);
 
+  // Cycle through examples when no messages
   useEffect(() => {
     if (messages.length === 0) {
-      const el = document.getElementById("rotator");
-      let idx = 0;
-      const FADE_MS = 500;
-      const HOLD_MS = 3000;
-
-      function showNext() {
-        el.classList.add("fade");
-
-        setTimeout(() => {
-          idx = (idx + 1) % phrases.length;
-          el.textContent = phrases[idx];
-          el.classList.remove("fade");
-        }, FADE_MS);
-      }
-
-      const interval = setInterval(showNext, HOLD_MS + FADE_MS);
+      const interval = setInterval(() => {
+        // First fade out
+        const element = document.querySelector('.cycling-example');
+        if (element) {
+          element.classList.add('fade-out');
+          
+          // After fade out, change text and fade in
+          setTimeout(() => {
+            setCurrentExampleIndex((prevIndex) => (prevIndex + 1) % examples.length);
+            element.classList.remove('fade-out');
+          }, 500); // Half second fade
+        }
+      }, 3000);
 
       return () => clearInterval(interval);
     }
-  }, [messages.length]);
+  }, [messages.length, examples.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,11 +51,13 @@ export default function ChatPanel({ onSearch, isConnected }) {
     setInputValue('');
     setIsLoading(true);
 
+    // Add user message
     setMessages(prev => [...prev, { type: 'user', content: userMessage }]);
 
     try {
       const response = await onSearch(userMessage);
       
+      // Add assistant response
       setMessages(prev => [...prev, { 
         type: 'assistant', 
         content: response.message || 'Found some great mountain biking videos for you!',
@@ -103,38 +103,12 @@ export default function ChatPanel({ onSearch, isConnected }) {
             marginTop: '40px',
             padding: '20px'
           }}>
-            <div 
-              style={{ 
-                fontSize: '24px', 
-                fontWeight: '600', 
-                marginBottom: '0px', 
-                color: '#e8f5e8' 
-              }}
-            >
-              Find your next ride by vibe
+            <div style={{ fontSize: '20px', fontWeight: '500', marginBottom: '8px', color: '#e8f5e8' }}>
+              Find your next ride by vibe.
             </div>
-            <div 
-              style={{ 
-                fontSize: '14px', 
-                fontWeight: '600', 
-                marginBottom: '0px', 
-                color: '#9ca3af' 
-              }}
-            >
-              try:
-            </div>
-            <div 
-              id="rotator" 
-              aria-live="polite"
-              style={{ 
-                fontSize: '16px', 
-                fontWeight: '400', 
-                marginBottom: '8px', 
-                color: '#e8f5e8',
-                fontStyle:'italic'
-              }}
-            >
-              flowy singletrack with golden hour light
+            <div style={{ fontSize: '16px', lineHeight: '1.5' }}>
+              <div><strong><small>Try:</small></strong></div>
+              <div><em key={currentExampleIndex} className="cycling-example">{examples[currentExampleIndex]}</em></div>
             </div>
           </div>
         )}
@@ -170,7 +144,7 @@ export default function ChatPanel({ onSearch, isConnected }) {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about trails, techniques, or find videos..."
+            placeholder="Ask about mountain biking trails, techniques, or find videos..."
             disabled={isLoading}
             rows={1}
           />
@@ -178,12 +152,11 @@ export default function ChatPanel({ onSearch, isConnected }) {
             type="submit" 
             className="send-button"
             disabled={isLoading || !inputValue.trim()}
-            style={{fontSize: '16px', fontWeight: '1600'}}
           >
-            <strong>{"→"}</strong>
+            →
           </button>
         </form>
       </div>
     </div>
   );
-}
+} 
