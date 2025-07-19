@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ChatPanel from './ChatPanel';
-import VideoPanel from './VideoPanel';
+import ChatPanel from './components/ChatPanel';
+import VideoPanel from './components/VideoPanel';
 import { api, videoApi } from './api';
 
 function DiscoverPage() {

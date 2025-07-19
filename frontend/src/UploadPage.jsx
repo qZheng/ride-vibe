@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UploadPanel from './UploadPanel';
+import UploadPanel from './components/UploadPanel';
 
 function UploadPage() {
   const navigate = useNavigate();
