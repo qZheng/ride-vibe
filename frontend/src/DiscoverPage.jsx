@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ChatPanel from './components/ChatPanel';
 import VideoPanel from './components/VideoPanel';
 import { api, videoApi } from './api';
 
 function DiscoverPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [video, setVideo] = useState({ videoUrl: '', timestamp: 0, metadata: null });
   const [serverStatus, setServerStatus] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Check server status on mount
+  // Check server status on mount and handle selected video from gallery
   useEffect(() => {
     checkServerStatus();
-  }, []);
+    
+    // Handle selected video from gallery
+    if (location.state?.selectedVideoId) {
+      loadSelectedVideo(location.state.selectedVideoId);
+      // Clear the state to prevent reloading on refresh
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location.state]);
 
   const checkServerStatus = async () => {
     console.log('Checking server status...');
@@ -24,6 +32,19 @@ function DiscoverPage() {
     // Also test the connection
     const connectionTest = await videoApi.testConnection();
     console.log('Connection test result:', connectionTest);
+  };
+
+  const loadSelectedVideo = async (videoId) => {
+    try {
+      const metadata = await videoApi.getVideoMetadata(videoId);
+      setVideo({
+        videoUrl: videoApi.getVideoUrl(videoId),
+        timestamp: 0,
+        metadata: metadata
+      });
+    } catch (error) {
+      console.error('Error loading selected video:', error);
+    }
   };
 
   const handleSearch = async (userMessage) => {
@@ -60,10 +81,10 @@ function DiscoverPage() {
     
     if (item === 'Upload') {
       navigate('/upload');
-    } else if (item === 'Discover') {
-      navigate('/');
+    } else if (item === 'Gallery') {
+      navigate('/gallery');
     }
-    // TODO: Implement Gallery page
+    // Discover button does nothing when already on discover page
   };
 
   const handleClickOutside = (e) => {
@@ -91,7 +112,7 @@ function DiscoverPage() {
             </div>
             {isDropdownOpen && (
               <div className="dropdown-menu">
-                <div className="dropdown-item" onClick={() => handleDropdownItemClick('Discover')}>
+                <div className="dropdown-item current-page" onClick={() => handleDropdownItemClick('Discover')}>
                   Discover
                 </div>
                 <div className="dropdown-item" onClick={() => handleDropdownItemClick('Upload')}>

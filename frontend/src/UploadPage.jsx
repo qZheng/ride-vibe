@@ -14,12 +14,12 @@ function UploadPage() {
     console.log(`Selected: ${item}`);
     setIsDropdownOpen(false);
     
-    if (item === 'Upload') {
-      navigate('/upload');
-    } else if (item === 'Discover') {
+    if (item === 'Discover') {
       navigate('/');
+    } else if (item === 'Gallery') {
+      navigate('/gallery');
     }
-    // TODO: Implement Gallery page
+    // Upload button does nothing when already on upload page
   };
 
   const handleClickOutside = (e) => {
@@ -50,7 +50,7 @@ function UploadPage() {
                 <div className="dropdown-item" onClick={() => handleDropdownItemClick('Discover')}>
                   Discover
                 </div>
-                <div className="dropdown-item" onClick={() => handleDropdownItemClick('Upload')}>
+                <div className="dropdown-item current-page" onClick={() => handleDropdownItemClick('Upload')}>
                   Upload
                 </div>
                 <div className="dropdown-item" onClick={() => handleDropdownItemClick('Gallery')}>
