@@ -113,6 +113,7 @@ def upload_video():
             "trail_name": trail_name,
             "duration": None,  # TODO: Extract duration from video
             "indexed_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+            "status": "indexing",
             "location": {
                 "latitude": None,
                 "longitude": None,
@@ -136,6 +137,55 @@ def upload_video():
         
     except Exception as e:
         return jsonify({"error": f"Upload failed: {str(e)}"}), 500
+
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    data = request.get_json()
+    if not data or 'type' not in data:
+        return jsonify({"error": "Invalid payload"}), 400
+
+    event_type = data.get("type")
+    webhook_data = data.get("data", {})
+    video_id = webhook_data.get("_id")
+
+    if not video_id:
+        return jsonify({"error": "Missing video ID"}), 400
+
+    print(f"Received webhook event: {event_type} for video ID: {video_id}")
+
+    metadata = load_metadata()
+    video_found = False
+    for video in metadata:
+        if video.get("video_id") == video_id:
+            video_found = True
+            if event_type == "video.index.ready":
+                video["status"] = "indexed"
+                video_metadata = webhook_data.get("metadata", {})
+                video["duration"] = video_metadata.get("duration")
+                print(f"Video {video_id} has been indexed successfully.")
+            elif event_type == "video.index.failed":
+                video["status"] = "failed"
+                print(f"Video {video_id} failed to index.")
+            else:
+                print(f"Received unhandled event type: {event_type}")
+                return jsonify({"status": "event type unhandled"})
+
+            break
+
+    if not video_found:
+        print(f"Webhook for unknown video ID: {video_id}")
+        # We still return 200 so TwelveLabs doesn't keep retrying.
+        return jsonify({"status": "video not found, but acknowledged"})
+
+    # Save updated metadata
+    try:
+        with open(META_PATH, 'w') as f:
+            json.dump(metadata, f, indent=2)
+    except Exception as e:
+        print(f"Error saving metadata: {e}")
+        return jsonify({"error": "Failed to update metadata"}), 500
+
+    return jsonify({"status": "received"})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True) 

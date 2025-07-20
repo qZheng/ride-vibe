@@ -1,56 +1,62 @@
 [
   {
-    "filename": "Riding The Biggest Jumps At Bike Park Vanta Full Run.mp4",
-    "video_id": "687be1562b144dc12e03164b",
-    "trail_name": "Riding The Biggest Jumps At Bike Park Vanta Full Run",
+    "filename": "20250720_081341_HYDROCUTS NEWEST BLUE FLOW TRAIL - BLUE ANGEL.mp4",
+    "video_id": "687ce2e761acc7595440299c",
+    "trail_name": "Hydrocut's Newest Blue Flow Trail - Blue Angel",
     "duration": null,
-    "indexed_at": "2025-07-19T18:19:24Z",
+    "indexed_at": "2025-07-20T12:37:49Z",
     "location": {
-      "latitude": 50.116249826463914,
-      "longitude": -122.94384382514167,
-      "name": "Whistler Bike Park"
+      "latitude": 43.42834594542387,
+      "longitude": -80.56875911845691,
+      "name": null
     },
-    "difficulty_rating": "8/10"
+    "difficulty_rating": "4/10",
+    "terrain": "Downhill",
+    "description": null
   },
   {
-    "filename": "Trails at Whistler Compilation.mp4",
-    "video_id": "687be1fb2b144dc12e03165f",
-    "trail_name": "Trails At Whistler Compilation",
+    "filename": "Whistler Trail Compilation.mp4",
+    "video_id": "687ce425c5994cb47174a276",
+    "trail_name": "Whistler Trail Compilation",
     "duration": null,
-    "indexed_at": "2025-07-19T18:22:52Z",
+    "indexed_at": "2025-07-20T12:44:05Z",
     "location": {
-      "latitude": 50.116249826463914,
-      "longitude": -122.94384382514167,
-      "name": "Whistler Bike Park"
+      "latitude": 50.12943550262798,
+      "longitude": -122.94036806594012,
+      "name": null
     },
-    "difficulty_rating": "9/10"
+    "difficulty_rating": "9/10",
+    "terrain": "Rocky",
+    "description": null
   },
   {
-    "filename": "20250719_184314_Santa Barbara GoPro Gravel Bike Descent POV.mp4",
-    "video_id": "upload_20250719_184314",
-    "trail_name": "Santa Barbara GoPro Gravel Bike Descent POV",
+    "filename": "GREENHILL BIKE PARK.mp4",
+    "video_id": "687ce85061fa6d2e4d1549e8",
+    "trail_name": "Greenhill Bike Park",
     "duration": null,
-    "indexed_at": "2025-07-19T22:43:14Z",
+    "indexed_at": "2025-07-20T13:01:42Z",
     "location": {
-      "latitude": null,
-      "longitude": null,
-      "name": ""
+      "latitude": 51.23534458728691,
+      "longitude": 8.356810126982932,
+      "name": null
     },
-    "difficulty_rating": null,
-    "description": ""
+    "difficulty_rating": "6/10",
+    "terrain": "Flat",
+    "description": null
   },
   {
-    "filename": "20250719_184334_Santa Barbara GoPro Gravel Bike Descent POV.mp4",
-    "video_id": "upload_20250719_184334",
-    "trail_name": "Santa Barbara GoPro Gravel Bike Descent POV",
-    "duration": null,
-    "indexed_at": "2025-07-19T22:43:34Z",
+    "filename": "The Most Unique Mountain Bike Trail I have ever ridden!.mp4",
+    "video_id": "687ce8f861acc759544029d7",
+    "trail_name": "Most Unique Mountain Bike Trail",
+    "duration": "12:00",
+    "indexed_at": "2025-07-20T13:04:24Z",
     "location": {
-      "latitude": null,
-      "longitude": null,
-      "name": ""
+      "latitude": 51.297073,
+      "longitude": -117.047715,
+      "name": "Lym Trail"
     },
-    "difficulty_rating": null,
-    "description": ""
+    "difficulty_rating": "8/10",
+    "terrain": "Downhill",
+    "description": null
   }
 ]
