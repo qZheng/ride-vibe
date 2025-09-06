@@ -67,6 +67,6 @@ Set your API keys in .env.
 
 ## Usage:
 
-Start the backend (flask run)
-Start the frontend (npm run dev)
-Upload a video or run a sample query
+- Start the backend (flask run)
+- Start the frontend (npm run dev)
+- Upload a video or run a sample query
